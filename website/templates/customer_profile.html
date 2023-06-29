@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+
+    {% if user.is_authenticated %}
+    <h1> Customer Profile </h1>
+    <br/>
+    {% if record %}
+    <div class="card">
+        <div class="card-header p-2 justify-content-center">
+          <h5> {{ record.first_name  }} {{ record.last_name  }} </h4>
+        </div>
+        <div class="card-body">
+            <p class="card_text"> <strong> First Name: </strong> {{ record.first_name }} </p>
+            <p class="card_text"> <strong> Last Name: </strong> {{ record.last_name }} </p>
+            <p class="card_text"> <strong> Email: </strong> {{ record.email }} </p>
+            <p class="card_text"> <strong> Phone: </strong> {{ record.phone }} </p>
+            <p class="card_text"> <strong> Address: </strong> {{ record.address }} </p>
+            <p class="card_text"> <strong> City: </strong> {{ record.city }} </p>
+            <p class="card_text"> <strong> State: </strong> {{ record.state }} </p>
+            <p class="card_text"> <strong> Zipcode: </strong> {{ record.zipcode }} </p>
+            <a href="#" class="btn btn-primary">Update</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+        </div>
+      </div>
+    {% endif %}
+
+    {% else %}
+
+    <h1> Login </h1>
+    <form method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" class="form-control" name="username", placeholder="Username" required>
+        </div>
+        <br/>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password", placeholder="Password" required>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-secondary">Login</button>
+
+    </form>
+
+
+</div>
+
+{% endif %}
+
+
+{% endblock content %}
