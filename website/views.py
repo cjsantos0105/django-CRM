@@ -76,3 +76,29 @@ def add_record(request):
     else:
         messages.success(request, "You Must Be Logged In To View This Page")
         return redirect("home")
+
+
+def update_record(request, pk):
+    if request.user.is_authenticated:
+        record = Record.objects.get(pk=pk)
+        form = AddRecordForm(request.POST or None, instance=record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Record Updated Successfully")
+            return redirect("customer_profile", pk=pk)
+        return render(request, "update_record.html", {"form": form})
+
+    else:
+        messages.success(request, "You Must Be Logged In To View This Page")
+        return redirect("home")
+
+
+def delete_record(request, pk):
+    if request.user.is_authenticated:
+        record = Record.objects.get(pk=pk)
+        record.delete()
+        messages.success(request, "Record Deleted Successfully")
+        return redirect("home")
+    else:
+        messages.success(request, "You Must Be Logged In To View This Page")
+        return redirect("home")

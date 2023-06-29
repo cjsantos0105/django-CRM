@@ -20,8 +20,8 @@
             <p class="card_text"> <strong> City: </strong> {{ record.city }} </p>
             <p class="card_text"> <strong> State: </strong> {{ record.state }} </p>
             <p class="card_text"> <strong> Zipcode: </strong> {{ record.zipcode }} </p>
-            <a href="#" class="btn btn-primary">Update</a>
-            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="{% url 'update_record' record.id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'delete_record' record.id %}" class="btn btn-danger">Delete</a>
             <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
         </div>
       </div>
